@@ -1,6 +1,4 @@
 class Cliente {
-  static _id = 0;
-
   constructor(nome, cognome, eta) {
     //Cliente, con un Id unico nome, cognome ed eta del passeggero.
     if (typeof Cliente._nextId == "undefined") Cliente._nextId = 0;
