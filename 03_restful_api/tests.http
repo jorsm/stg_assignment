@@ -1,0 +1,19 @@
+// httpYac tests 
+@base_url = http://localhost:5000
+@apiPath=/v1/people
+@host={{base_url}}{{apiPath}}
+
+@personID = 1
+
+### Get all People
+GET / HTTP/1.1
+
+
+### Update Person 
+PUT /{{personID}} HTTP/1.1
+    Content-Type: application/json
+
+{"nome": "Giovanni"}
+
+### Delete Person 
+DELETE /{{personID}} HTTP/1.1

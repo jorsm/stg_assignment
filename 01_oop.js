@@ -1,6 +1,8 @@
+/**
+ * Cliente, con un Id unico nome, cognome ed eta del passeggero.
+ */
 class Cliente {
   constructor(nome, cognome, eta) {
-    //Cliente, con un Id unico nome, cognome ed eta del passeggero.
     if (typeof Cliente._nextId == "undefined") Cliente._nextId = 0;
     this.id = Cliente._nextId++;
     this.nome = nome; // ||""
@@ -17,12 +19,14 @@ class Cliente {
     volo.rimuoviPrenotazione(this);
   }
 }
+/**
+ * Ogni volo ha: un identificativo univoco due var d'istanza denominate posti e attesa
+   ed un numero max di passeggeri (passato come parametro al costruttore).
+ */
 class Volo {
   static _id = 0;
 
   constructor(max_passeggeri) {
-    // identificativo univoco due var d'istanza denominate posti e attesa
-    //Ogni volo ha un numero max di passeggeri (passato come parametro al costruttore).
     if (typeof Volo._nextId == "undefined") Volo._nextId = 0;
     this.id = Volo._nextId++;
     this.posti = new Map();
@@ -31,16 +35,21 @@ class Volo {
     console.log(`Volo: ${this.id},\n\t${this.max_passeggeri}`);
   }
 
+  /**
+   * Quando un cliente prenota il volo, lo mettiamo in 'posti' se c'e' ancora disponibilita', altrimenti lo mettiamo in 'attesa'
+   * @param {Cliente} cliente
+   */
   aggiungiPrenotazione(cliente) {
-    //Quando un cliente prenota il volo, lo mettiamo in posti se c'e' ancora disponibilita',
-    //altrimenti lo mettiamo in attesa
     this.posti.size < this.max_passeggeri
       ? this.posti.set(cliente.id, cliente)
       : this.attesa.push(cliente);
   }
+  /**
+   *  Quando un cliente in posti disdice il suo volo, si libera un posto e prendiamo il primo elemento di 'attesa' e lo trasferiamo su 'posti'.
+   *
+   * @param {Cliente} cliente
+   */
   rimuoviPrenotazione(cliente) {
-    //Quando un cliente in posti disdice il suo volo,
-    //si libera un posto e prendiamo il primo elemento di attesa e lo trasferiamo su posti.
     if (this.posti.delete(cliente.id)) {
       let nuovoPasseggero = this.attesa.shift();
       if (nuovoPasseggero) this.posti.put(nuovoPasseggero.id, nuovoPasseggero);

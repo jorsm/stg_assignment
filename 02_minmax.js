@@ -18,6 +18,7 @@ function readLine() {
  *
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
+////////////////////////////////////////
 function miniMax(arr) {
   //input: five integers
   //1 <= arr[i] <= 10^9
@@ -26,6 +27,7 @@ function miniMax(arr) {
   let sum = 0;
 
   arr.forEach((element) => {
+    //could skip first element
     if (element < min) min = element;
     if (element > max) max = element;
     sum = sum + element;
@@ -36,7 +38,7 @@ function miniMax(arr) {
   console.log(result);
   return result;
 }
-////////////////////////////////////
+////////////////////////////////////////
 function main() {
   const arr = readLine()
     .replace(/\s+$/g, "")
